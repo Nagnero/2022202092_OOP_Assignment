@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q2\assignment1-1_Q2\main.cpp(22,21): warning C4805: '==': 연산에 'double' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q2\assignment1-1_Q2\main.cpp(28,14): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  assignment1-1_Q2.vcxproj -> C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q2\x64\Debug\assignment1-1_Q2.exe
