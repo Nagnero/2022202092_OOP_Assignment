@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q4\assignment1-1_Q4\main.cpp(19,72): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q4\assignment1-1_Q4\main.cpp(32,86): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  assignment1-1_Q4.vcxproj -> C:\Users\광운MOOC센터\Desktop\code\2022202092_OOP_Assignment\assignment1-1\assignment1-1_Q4\x64\Debug\assignment1-1_Q4.exe
