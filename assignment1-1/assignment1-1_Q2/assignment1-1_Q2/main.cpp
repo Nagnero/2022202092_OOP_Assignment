@@ -29,12 +29,12 @@ int main()
 	// 판별식이 0이면 중근을 출력
 	if (discriminant == 0)
 	{
-		cout << "X1, X2: " << -b / (2 * a) << endl;
+		cout << "X1, X2: " << -b / (2 * a) << " (double root)" << endl;
 	}
 	// 판별식이 0보다 작으면 근이 없다고 출력
 	else if (discriminant < 0)
 	{
-		cout << "The equation has no real number solution" << endl;
+		cout << "The equation has no real number solutions." << endl;
 	}
 	// 판별식이 0 초과일 때 
 	else
@@ -54,7 +54,7 @@ int main()
 			x2 = (-2 * c) / (b - sqrt(discriminant));
 		}
 		// 결과 출력
-		cout << "X1: " << x1 << ",   X2: " << x2 << endl;
+		cout << "X1: " << x1 << ", X2: " << x2 << endl;
 	}
 
 	return 0;
