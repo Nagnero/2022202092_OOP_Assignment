@@ -25,7 +25,7 @@ int main()
 		det += matrix[i][0] * det_22((i + 1) % 3, (i + 2) % 3, 1, 2, matrix) * pow(-1, i);
 
 	// det가 0이하면 역행렬이 존재하지 않는다는 문구 출력 후 프로그램 종류
-	if (det < 0 || det == 0)
+	if (det == 0)
 	{
 		cout << "The inverse matrix does not exist." << endl;
 		return 0;

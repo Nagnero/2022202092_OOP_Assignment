@@ -4,7 +4,7 @@ using namespace std;
 void draw(int row, int col);
 void draw_triangle(int len, int row, int col);
 
-char arr[384][717]; // k가 8일때 최대 행 384, 열 717
+char arr[384][767]; // k가 8일때 최대 행 384, 열 767
 
 int main()
 {
@@ -23,7 +23,11 @@ int main()
         for (j = 0; j < col; j++)
             arr[i][j] = ' ';
 
-    draw_triangle(row, 0 ,row - 1); // arr 배열에 좌표처럼 찍는 재귀함수 첫 호출
+    // arr 배열에 좌표처럼 찍는 재귀함수 첫 호출
+    // 첫번째 매개변수로 열을 그대로 전달하여 반복횟수 계산
+    // 두번째 매개변수로 삼각형의 상단부터 그릴 것이므로 0 전달
+    // 세번째 매개변수로 삼각형의 좌우 방향으로 이동하면서 출력할 col을 row - 1로 전달
+    draw_triangle(row, 0 ,row - 1);
 
     // 이중 반복문으로 이중배열 출력
     for (int i = 0; i < row; i++) {
