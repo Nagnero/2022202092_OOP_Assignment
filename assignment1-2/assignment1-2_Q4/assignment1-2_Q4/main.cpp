@@ -61,16 +61,24 @@ int main()
 		return -1;
 	}
 
-
-	if (x1 > x2)
+	// 사각형의 왼쪽 위와 오른쪽 아래 좌표로 설정하는 코드
+	if (x1 > x2 && y1 > y2) {
 		swap(x1, x2);
+		swap(y1, y2);
+	}
+	else if (x1 > x2 && y1 < y2) {
+		swap(x1, x2);
+	}
+	else if (x1 < x2 && y1 > y2) {
+		swap(y1, y2);
+	}
+	// 자른 이미지의 너비와 높이 계산
+	crop_width = x2 - x1;
+	crop_height = y2 - y1;
 
-	crop_width = x1 - x2;
-	crop_height = y1 - y2;
-
-	for (i = 0; i < x2 - x1; i++)
-		for (j = 0; j < y2 - y1; j++)
-			output_image[i][j] = input_image[x1 + i][y1 + j];
+	for (i = 0; i < crop_height; i++)
+		for (j = 0; j < crop_width; j++)
+			output_image[i][j] = input_image[y1 + i][x1 + j];
 	char RESULT_NAME1[100] = "Barbara_Cropped_.raw";
 	fopen_s(&fp, RESULT_NAME1, "wb");
 	if (fp == 0)
@@ -78,7 +86,8 @@ int main()
 		cout << "Failed to open filename(" << RESULT_NAME1 << ")" << endl;
 		return -1;
 	}
-	fwrite((uint8_t*)output_image[0], sizeof(uint8_t), (size_t)(crop_width * crop_height), fp);
+	for(int i = 0; i < crop_height; i++)
+		fwrite((uint8_t*)output_image[i], sizeof(uint8_t), (size_t)(crop_width), fp);
 	fclose(fp);
 
 
