@@ -1,5 +1,6 @@
 ﻿  main.cpp
-C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(12,15): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(16,27): warning C4552: '%': 식의 결과가 사용되지 않습니다.
-C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(30,19): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(29,15): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(113,24): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(128,23): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\assignment1-2_Q2\main.cpp(143,15): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   assignment1-2_Q2.vcxproj -> C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q2\x64\Debug\assignment1-2_Q2.exe
