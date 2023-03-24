@@ -33,6 +33,9 @@ int main()
 	cin.ignore(10, ','); // 콤마 입력 제외
 	cin >> y2;
 
+	// 좌표를 배열의 index로 만들기 위해 1씩 빼주기
+	x1--, x2--, y1--, y2--;
+
 
 	// Load input image, 읽기 모드로 오픈
 	fopen_s(&fp, IMAGE_NAME, "rb");
