@@ -5,13 +5,13 @@
 
 using namespace std;
 
-char T[16]{}, T[12]{};
+char T[16]{}, T1[12]{};
 const int divisor[5] = { 1, 1, 0, 1, 1 };
 
 
 void Transmission_channel(const char* data);
 void Sender();
-void Receiver(const char* T);
+int Receiver(const char* T);
 int shift(int* binary, int* Q, int index);
 
 
@@ -20,23 +20,6 @@ int main() {
 
     Sender();
 
-}
-
-
-
-void Transmission_channel(const char* data) {
-
-    srand(time(NULL)); // 실행시마다 다른 값 출력
-
-    for (int i = 0; i < 16; i++) {
-        if (rand() % 100 + 1 > 5) // 0이 나오지 않으면 실행; 5% 확률
-            T[i] = data[i];
-        else {
-            int temp = data[i] - '0';
-            temp = (temp + 1) % 2;
-            T[i] = temp + '0';
-        }
-    }
 }
 
 void Sender() {
@@ -99,7 +82,69 @@ void Sender() {
     for (i = 0; i < 12; i++)
         cout << T[i];
 
-    Receiver(T);
+    if (Receiver(T))
+        cout << endl << "No detected error";
+    else
+        cout << endl << "Receiver has detected error" << endl;
+
+}
+
+void Transmission_channel(const char* data) {
+
+    srand(time(NULL)); // 실행시마다 다른 값 출력
+
+    for (int i = 0; i < 16; i++) {
+        if (rand() % 100 + 1 > 5) // 0이 나오지 않으면 실행; 5% 확률
+            T[i] = data[i];
+        else {
+            int temp = data[i] - '0';
+            temp = (temp + 1) % 2;
+            T[i] = temp + '0';
+        }
+    }
+}
+
+int Receiver(const char* arr) {
+    int binary[16], Q[5]{}, bucket[5]{}, i, j;
+
+    // 입력받은 데이터를 이진 숫자로 변환
+    for (i = 0; i < 16; i++)
+        binary[i] = arr[i] - '0';
+
+    // bucket에 첫 다섯자리 저장
+    for (i = 0; i < 5; i++)
+        bucket[i] = binary[i];
+
+    // bucket의 첫번째 요소가 0이면 다음루프 실행, 첫 입력값이 0인경우
+    if (bucket[0] == 0) {
+        for (j = 0; j < 5; j++) {
+            bucket[j] = binary[1 + j];
+        }
+    }
+    // dividsor로 12번 반복 나누기
+    for (i = 0; i < 12;) {
+
+        // XOR 연산
+        for (j = 0; j < 5; j++)
+            Q[j] = divisor[j] ^ bucket[j];
+
+        int temp = i;
+        i = shift(binary, Q, i);
+        if (temp == i)
+            i++;
+
+        for (j = 0; j < 5; j++)
+            bucket[j] = Q[j];
+    }
+
+    for (i = 1; i < 5; i++) {
+        if (bucket[i] == 0)
+            continue;
+        else
+            return 0;
+    }
+
+    return 1;
 }
 
 int shift(int* binary, int* Q, int index) {
