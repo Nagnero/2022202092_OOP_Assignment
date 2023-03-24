@@ -1,4 +1,5 @@
 ﻿  main.cpp
-C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\assignment1-2_Q4\main.cpp(89,32): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\assignment1-2_Q4\main.cpp(96,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\assignment1-2_Q4\main.cpp(94,32): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\assignment1-2_Q4\main.cpp(101,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LINK : C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\x64\Debug\assignment1-2_Q4.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   assignment1-2_Q4.vcxproj -> C:\Users\david\Desktop\코드\2022202092_OOP_Assignment\assignment1-2\assignment1-2_Q4\x64\Debug\assignment1-2_Q4.exe

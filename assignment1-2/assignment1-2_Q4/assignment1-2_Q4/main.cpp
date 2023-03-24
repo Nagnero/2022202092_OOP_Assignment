@@ -13,7 +13,6 @@ void swap(int& x, int& y); // 문자 위치 바꿈 사용자 정의함수
 int main()
 {
 	const char* IMAGE_NAME = "Barbara_512x512_yuv400_8bit.raw";
-	const char* RESULT_NAME = "result_Barbara_512x512_yuv400_8bit.raw";
 	const char* RESULT_NAME2 = "Barbara_horizontalflip.raw"; // 수평반전 파일명
 	const char* RESULT_NAME3 = "Barbara_verticalflip.raw"; // 수직반전 파일명
 	const int IMAGE_HEIGHT = 512, IMAGE_WIDTH = 512;

@@ -5,10 +5,12 @@
 
 using namespace std;
 
-char T[16]{}, T1[12]{};
+// 전역변수로 transmitted data 선언 후 초기화
+char T[16]{};
+// divisor 전역변수로 저장
 const int divisor[5] = { 1, 1, 0, 1, 1 };
 
-
+// 사용자정의함수의 prototype
 void Transmission_channel(const char* data);
 void Sender();
 int Receiver(const char* T);
@@ -19,19 +21,20 @@ int shift(int* binary, int* Q, int index);
 int main() {
 
     Sender();
-
+    
+    return 0;
 }
 
+// Sender함수 정의부
 void Sender() {
-    char data[16];
-    int binary[16], Q[5]{}, bucket[5]{}, i, j;
+    char data[16]; // 사용자에게 입력을 받을 문자배열
+    int binary[16], Q[5]{}, bucket[5]{}, i, j;// 이진수를 저장할 배열 및 임시 배열 선언 후 초기화
 
-    cin >> data;
+    cin >> data;// 사용자에게 입력받음
+
     // 입력받은 데이터를 이진 숫자로 변환
     for (i = 0; i < 12; i++)
         binary[i] = data[i] - '0';
-    for (; i < 16; i++)
-        binary[i] = 0;
 
     // bucket에 첫 다섯자리 저장
     for (i = 0; i < 5; i++)
@@ -51,9 +54,9 @@ void Sender() {
         for (j = 0; j < 5; j++)
             Q[j] = divisor[j] ^ bucket[j];
 
-        int temp = i;
-        i = shift(binary, Q, i);
-        if (temp == i)
+        int temp = i; // shift 함수에서 i가 바뀌었는지 확인하기 위한 변수
+        i = shift(binary, bucket, i); // shift 함수 호출
+        if (temp == i) // i가 증가하지 않았다면 1 증가
             i++;
 
         for (j = 0; j < 5; j++)
@@ -68,8 +71,10 @@ void Sender() {
     for (i = 12; i < 16; i++)
         data[i] = binary[i] + '0';
 
+    // 신호 오류처리 함수 출력
     Transmission_channel(data);
 
+    // 콘솔 출력부
     cout << "Coded frame: ";
     for (i = 0; i < 16; i++)
         cout << data[i];
@@ -82,6 +87,7 @@ void Sender() {
     for (i = 0; i < 12; i++)
         cout << T[i];
 
+    // 신호 받아서 에러 유무 출력부
     if (Receiver(T))
         cout << endl << "No detected error";
     else
@@ -89,14 +95,15 @@ void Sender() {
 
 }
 
+// 신호 오류처리 함수 정의부
 void Transmission_channel(const char* data) {
 
     srand(time(NULL)); // 실행시마다 다른 값 출력
 
     for (int i = 0; i < 16; i++) {
-        if (rand() % 100 + 1 > 5) // 0이 나오지 않으면 실행; 5% 확률
+        if (rand() % 100 + 1 > 5) // 95% 확률로 전역 배열에 데이터 저장
             T[i] = data[i];
-        else {
+        else { // 5% 확률로 값 반대로 변환 후 저장
             int temp = data[i] - '0';
             temp = (temp + 1) % 2;
             T[i] = temp + '0';
@@ -128,9 +135,9 @@ int Receiver(const char* arr) {
         for (j = 0; j < 5; j++)
             Q[j] = divisor[j] ^ bucket[j];
 
-        int temp = i;
-        i = shift(binary, Q, i);
-        if (temp == i)
+        int temp = i; // shift 함수에서 i가 바뀌었는지 확인하기 위한 변수
+        i = shift(binary, bucket, i); // shift 함수 호출
+        if (temp == i) // i가 증가하지 않았다면 1 증가
             i++;
 
         for (j = 0; j < 5; j++)
@@ -160,9 +167,7 @@ int shift(int* binary, int* Q, int index) {
         temp = temp << 1;
         if (binary[index + 5] == 1)
             temp++;
-        //for (int j = 0; j < 4; j++)
-        //    Q[j] = Q[j + 1];
-        //Q[4] = binary[index + 5];
+
         index++;
         if (index == 12) {
             temp = temp >> 1;
