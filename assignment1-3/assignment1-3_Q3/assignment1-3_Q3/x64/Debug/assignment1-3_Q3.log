@@ -1,3 +1,6 @@
 ﻿  main.cpp
-C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\assignment1-3_Q3\main.cpp(21,18): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\assignment1-3_Q3\main.cpp(20,24): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\assignment1-3_Q3\main.cpp(39,38): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\assignment1-3_Q3\main.cpp(46,29): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\assignment1-3_Q3\main.cpp(49,42): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   assignment1-3_Q3.vcxproj -> C:\Users\LG\Desktop\코드\2022202092_OOP_Assignment\assignment1-3\assignment1-3_Q3\x64\Debug\assignment1-3_Q3.exe
