@@ -3,26 +3,32 @@
 
 using namespace std;
 
-void insertionSort(int arr[], int len);
-void bubbleSort(int arr[], int len);
+void insertionSort(int* arr, int len);
+void bubbleSort(int* arr, int len);
 
 int  n1 = 0, n2 = 0, n3 = 0, n4 = 0;
 
 int main() {
-	int len;
+	int len, i ,j;
 
 	cout << "Enter number of inputs: ";
 	cin >> len;
 
-	int* arr = new int[len];
+	int** arr = new int*[4];
+	for (i = 0; i < 4; i++)
+		arr[i] = new int[len];
 
-	cout << "Enter array";
-	for (int i = 0; i < len; i++)
-		cin >> arr[i];
+	cout << "Enter array: ";
+	for (j = 0; j < len; j++)
+		cin >> arr[0][j];
 
-	insertionSort(arr, len);
+	for (i = 1; i < 4; i++)
+		for (j = 0; j < len; j++)
+			arr[i][j] = arr[0][j];
+
+	insertionSort(arr[0], len);
 	cout << endl;
-	bubbleSort(arr, len);
+	bubbleSort(arr[3], len);
 
 
 
@@ -33,8 +39,8 @@ int main() {
 	return 0;
 }
 
-void insertionSort(int arr[], int len) {
-	for (int cur = 1; cur <= len; cur++) {
+void insertionSort(int* arr, int len) {
+	for (int cur = 1; cur <= len - 1; cur++) {
 		bool is_end = 0;
 		int temp = arr[cur]; // temp에 비교할 기준 저장
 		int walker; // 움직이며 비교할 index
@@ -57,7 +63,7 @@ void insertionSort(int arr[], int len) {
 	return;
 }
 
-void bubbleSort(int arr[], int len) {
+void bubbleSort(int* arr, int len) {
 	for (int i = 0; i < len - 1; i++) {
 		for (int j = 0; j < len - 1 - i; j++) {
 			if (arr[j] > arr[j + 1]) {
