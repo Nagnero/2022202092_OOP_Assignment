@@ -1,15 +1,21 @@
 #include <iostream>
 #include <time.h>
 
+
 using namespace std;
 
 void insertionSort(int* arr, int len);
 void quickSort(int* arr, int start, int end);
+void mergeSort(int* arr, int start, int end);
+void merge(int* arr, int start, int mid, int end);
 void bubbleSort(int* arr, int len);
 
 int  n1 = 0, n2 = 0, n3 = 0, n4 = 0;
 
 int main() {
+
+
+
 	int len, i ,j;
 
 	cout << "Enter number of inputs: ";
@@ -30,6 +36,10 @@ int main() {
 	insertionSort(arr[0], len);
 	cout << endl;
 	quickSort(arr[1], 0, len - 1);
+	for (int i = 0; i < len; i++)
+		cout << arr[1][i] << " ";
+	cout << endl;
+	mergeSort(arr[2], 0, len - 1);
 	for (int i = 0; i < len; i++)
 		cout << arr[1][i] << " ";
 	cout << endl;
@@ -97,6 +107,51 @@ void quickSort(int* arr, int start, int end) {
 	quickSort(arr, right + 1, end); // pivot 기준 뒷부분
 
 	return;
+}
+
+void mergeSort(int* arr, int start, int end) {
+	if (start >= end)
+		return;
+
+	int mid = (start + end) / 2;
+
+	mergeSort(arr, start, mid);
+	mergeSort(arr, mid + 1, end);
+
+	merge(arr, start, mid, end);
+}
+
+void merge(int* arr, int start, int mid, int end) {
+	
+	int i, j, cnt = start, L_len = mid - start + 1, R_len = end - mid;
+
+	// 임시 배열
+	int* L = new int[L_len];
+	int* R = new int[R_len];
+
+	for (i = 0; i < L_len; i++)
+		L[i] = arr[start + i];
+	for (j = 0; j < R_len; j++)
+		R[j] = arr[mid + 1 + j];
+
+	i = 0, j = 0; // 임시 배열의 인덱스
+	while (i < L_len && j < R_len) {
+		if (L[i] < R[j]) {
+			arr[cnt++] = L[i++];
+		}
+		else {
+			arr[cnt++] = R[j++];
+		}
+	}
+
+	while (i < L_len)
+		arr[cnt++] = L[i++];
+
+	while (j < R_len)
+		arr[cnt++] = R[j++];
+
+	delete[] L;
+	delete[] R;
 }
 
 void bubbleSort(int* arr, int len) {
