@@ -10,7 +10,7 @@ int GCD(int a, int b);
 int output[50];
 
 int main() {
-    double Vout;
+    double Vout, Ps, Pload, Iall;
     int R1, R2, Rload = 0, Vs, num, de_num, gcd;
 
     cout << "Vs: ";
@@ -31,9 +31,13 @@ int main() {
         num = Vs * R2 * Rload * (Rload + R2);
         de_num = (R1 * (Rload + R2) + R2 * Rload) * (Rload + R2);
         Vout = (double)num / de_num;
+        Iall = (double)(Vs * (R2 + Rload)) / (R1 * (R2 + Rload) + (R2 * Rload));
+
+        Ps = Iall * Vs;
+        Pload = (Vout * R2 * Iall) / (R2 + Rload);
     }
 
-    cout << "Vout: " << num << "/" << de_num;
+    cout << endl << "Vout: " << num << "/" << de_num;
     
     if (num <= de_num)
         gcd = GCD(de_num, num);
@@ -80,21 +84,25 @@ int main() {
     for (int i = 0; i < num_5; i++)
         temp /= 5;
     
-    if (temp == 1) // 분모의 소인수가 2와 5밖에 없으면 유한소수
-        cout << "유한소수";
-    else {
+    if (temp != 1) {// 분모의 소인수가 2와 5밖에 없으면 유한소수
+
         output[cnt++] = pass_num / de_num; // 0번째에 1 저장
         pass_num = (pass_num % de_num) * 10; // 30 저장
         output[cnt++] = pass_num / de_num; // 1번째에 4 저장
         pass_num = (pass_num % de_num) * 10; // 20 저장
         cnt = cal(pass_num, de_num, cnt);
+
+        cout << " = " << integer << ".(";
+        for (int i = 0; i < cnt; i++)
+            cout << output[i];
+        cout << ")";
     }
 
-    cout << " = " << integer << ".(";
-    for (int i = 0; i < cnt; i++)
-        cout << output[i];
-    cout << ")";
-    
+    if (Rload != 0) {
+        cout << fixed;
+        cout.precision(2);
+        cout << endl << "Load power ratio: " << (Pload / Ps) * 100 << "%";
+    }
 
     return 0;
 }
