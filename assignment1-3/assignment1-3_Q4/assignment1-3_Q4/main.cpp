@@ -166,7 +166,39 @@ void mergeSort(int* arr, int start, int end) {
 	mergeSort(arr, mid + 1, end); // 가운데 기준 오른쪽 쪼개기
 
 	// 쪼개진 배열을 비교하며 합치기
-	merge(arr, start, mid, end);
+	int i, j, cnt = start, L_len = mid - start + 1, R_len = end - mid;
+
+	// 임시 배열 동적할당
+	int* L = new int[L_len];
+	int* R = new int[R_len];
+
+	// 동적으로 할당한 배열에 순차적으로 값 대입
+	for (i = 0; i < L_len; i++)
+		L[i] = arr[start + i];
+	for (j = 0; j < R_len; j++)
+		R[j] = arr[mid + 1 + j];
+
+	i = 0, j = 0; // 임시 배열의 인덱스
+	// 두 임시 배열에서 앞에서부터 작은 순서대로 본 배열에 값 대입
+	while (i < L_len && j < R_len) {
+		if (L[i] < R[j]) { // 왼쪽이 작은 경우 
+			arr[cnt++] = L[i++];// 왼쪽값 본배열에 대입
+		}
+		else { // 오른쪽이 작은 경우
+			arr[cnt++] = R[j++]; // 오른쪽값 본배열에 대입
+		}
+	} // 왼쪽이나 오른쪽중에 한쪽 index가 범위를 벗어나면 탈출
+
+	// 범위를 벗어나지 않은 index에 따라 왼쪽이나 오른쪽 값 마저 대입
+	while (i < L_len)
+		arr[cnt++] = L[i++];
+	while (j < R_len)
+		arr[cnt++] = R[j++];
+
+	// 동적할당 해제
+	delete[] L;
+	delete[] R;
+}
 }
 
 // 합병 정렬에서 합성 함수
