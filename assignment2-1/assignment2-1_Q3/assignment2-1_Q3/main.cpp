@@ -9,29 +9,36 @@ using namespace std;
 struct {
 	char name[40];
 	int age;
-} person, person_copy;
+} person1, person1_copy, person2, person2_copy;
 
 int main() {
-	// memset 메서드 test부
-	/*char str1[] = "almost";
-	char str2[] = "almost";
-	memset(str1, '-', 3);
-	oopstd::memset(str2, '-', 3);
-	cout << "original memset method : ";
-	puts(str1);
-	cout << "custom memset method : ";
-	puts(str2);
+	// memset method test
+	cout << "Origianl" << endl;
+	char str1_memset[] = "almost";
+	memset(str1_memset, '-', 3);
+	puts(str1_memset);
+	// custom method test
+	cout << "Custom" << endl;
+	char str2_memset[] = "almost";
+	oopstd::memset(str2_memset, '-', 3);
+	puts(str2_memset);
 
-	cout << endl << endl;
-	// memcpy 메서드 test부
+	
+	// memcpy method test
+	cout << endl << "Origianl" << endl;
 	char myname[] = "Pierre de Fermat";
-	//
-	memcpy(person.name, myname, strlen(myname) + 1);*/
+	memcpy(person1.name, myname, strlen(myname) + 1);
+	person1.age = 46;
+	memcpy(&person1_copy, &person1, sizeof(person1));
+	printf("person1_copy1: %s, %d \n", person1_copy.name, person1_copy.age);
+	// custom method test
+	cout << "Custom" << endl;
+
 
 
 	// strcmp 메서드 test
 	/*
-	cout << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	char key[] = "apple";
 	char buffer[80];
 	do {
@@ -51,7 +58,7 @@ int main() {
 
 
 	// strncmp 메서드 test
-	/*cout << "Origianl" << endl;
+	/*cout << endl << "Origianl" << endl;
 	char str[][5] = {"R2D2", "C3P0", "R2A6"};
 	int n;
 	puts("Looking for R2 astromech droids...");
@@ -69,7 +76,7 @@ int main() {
 
 
 	// strcpy 메서드 test
-	/*cout << "Origianl" << endl;
+	/*cout << endl << "Origianl" << endl;
 	char str1[] = "Sample string";
 	char str2[40];
 	char str3[40];
@@ -86,7 +93,7 @@ int main() {
 
 
 	// strncpy method test
-	/*cout << "Origianl" << endl;
+	/*cout << endl << "Origianl" << endl;
 	char str1_stncpy[] = "To be or not to be";
 	char str2_stncpy[40];
 	char str3_stncpy[40];
@@ -109,7 +116,7 @@ int main() {
 
 
 	// strlen method test
-	/*cout << "Origianl" << endl;
+	/*cout << endl << "Origianl" << endl;
 	char szInput[256];
 	printf("Enter a sentece: ");
 	gets_s(szInput, sizeof(szInput));
@@ -119,16 +126,37 @@ int main() {
 	printf("Enter a sentece: ");
 	gets_s(szInput, sizeof(szInput));
 	printf("The sentence entered is %u characters long.\n", (unsigned)oopstd::strlen(szInput)); */
-
-
+	
 	// atoi method test
+	/*cout << endl << "Origianl" << endl;
 	int i_atoi;
 	char buffer_atoi[256];
 	printf("Enter a number: ");
 	fgets(buffer_atoi, 256, stdin);
 	i_atoi = atoi(buffer_atoi);
 	printf("The value entered is %d. Its double is %d.\n", i_atoi, i_atoi * 2);
-	
+	// custom method test
+	cout << "Custom" << endl;
+	printf("Enter a number: ");
+	fgets(buffer_atoi, 256, stdin);
+	i_atoi = oopstd::atoi(buffer_atoi);
+	printf("The value entered is %d. Its double is %d.\n", i_atoi, i_atoi * 2);*/
+
+
+	// atof method test
+	/*cout << endl << "Origianl" << endl;
+	double n_atof;
+	char buffer_atof[256];
+	printf("Enter a number: ");
+	fgets(buffer_atof, 256, stdin);
+	n_atof = atof(buffer_atof);
+	printf("The value entered is %f.\n", n_atof);
+	// custom method test
+	cout << "Custom" << endl;
+	printf("Enter a number: ");
+	fgets(buffer_atof, 256, stdin);
+	n_atof = oopstd::atof(buffer_atof);
+	printf("The value entered is %f.\n", n_atof);*/
 
 	return 0;
  }

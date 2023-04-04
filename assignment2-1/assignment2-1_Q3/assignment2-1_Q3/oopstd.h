@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 namespace oopstd {
 
@@ -13,7 +14,13 @@ namespace oopstd {
 		return ptr;
 	}
 
-	void* memcpy(void* destination, const void* source, size_t num);
+
+	void* memcpy(void* destination, const void* source, size_t num) {
+		for (int i = 0; i < num; i++) {
+			destination[i]
+		}
+	}
+
 
 
 	int strcmp(const char* str1, const char* str2) {
@@ -34,6 +41,7 @@ namespace oopstd {
 		return 0;
 	}
 
+
 	int strncmp(const char* str1, const char* str2, size_t num) {
 
 		for (int i = 0; i < num; i++) {
@@ -51,6 +59,7 @@ namespace oopstd {
 		return 0;
 	}
 
+
 	char* strcpy(char* destination, const char* source) {
 		int i = 0;
 
@@ -62,6 +71,7 @@ namespace oopstd {
 
 		return destination;
 	}
+
 
 	char* strncpy(char* destination, const char* source, size_t num) {
 		int i = 0;
@@ -76,6 +86,7 @@ namespace oopstd {
 		return destination;
 	}
 
+
 	size_t strlen(const char* str) {
 		size_t result = 0;
 
@@ -85,8 +96,31 @@ namespace oopstd {
 		return result;
 	}
 
-	int atoi(const char* str);
-	float atof(const char* str);
+
+	int atoi(const char* str) {
+		int len = 0, result = 0;
+
+		while (!(str[len] == '\n'))
+			len++;
+
+		for (int i = 0; i < len; i++)
+			result += (str[i] - '0') * pow(10, len - i - 1);
+
+		return result;
+	}
+
+
+	float atof(const char* str) {
+		int len = 0, result = 0;
+
+		while (!(str[len] == '\n'))
+			len++;
+
+		for (int i = 0; i < len; i++)
+			result += (str[i] - '0') * pow(10, len - i - 1);
+
+		return (float)result;
+	}
 }
 
 /*int len = 0; // 문자열의 길이
