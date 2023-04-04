@@ -94,6 +94,11 @@ void Stack::print_top() {
 void Stack::print_all() {
     Node* curNode = bottom;
 
+    if ((this->is_empty())) {
+        cout << "Stack is empty" << endl;
+        return;
+    }
+
     while (curNode) {
         cout << curNode->getValue() << " ";
         curNode = curNode->getNext();
@@ -115,7 +120,8 @@ int main() {
     char command[6]{};
     int input;
 
-    while (strcmp(command, "exit") != 0) {
+    while (1) {
+
         cin >> command;
 
         if (!strcmp(command, "push")) {
@@ -133,6 +139,9 @@ int main() {
         }
         else if (!strcmp(command, "empty")) {
             cout << stack->is_empty() << endl;
+        }
+        else if (strcmp(command, "exit") == 0) {
+            break;
         }
         else {
             cout << "Enter valid command" << endl;
