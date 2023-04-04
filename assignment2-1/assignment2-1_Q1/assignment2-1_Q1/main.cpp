@@ -39,7 +39,7 @@ public:
     void pop();
     void print_top();
     void print_all();
-    bool is_empty();
+    int is_empty();
 };
 
 // 요소 추가 메서드
@@ -66,35 +66,80 @@ void Stack::pop() {
     }
     else {
         if (this->size > 1) {
+            Node* tempNode = top;
+            cout << top->getValue() << endl;
+            top = top->getPrev();
+            top->setNext(NULL);
+            delete tempNode;
 
+            this->size--;
         }
         else {
-            cout << top->getValue();
-            Node* tempNode =
-                cout << top->getValue();
-            delete top;
-            top = NULL;
+            cout << top->getValue() << endl;               
+            delete bottom;
             bottom = NULL;
-            size--;
+            top = NULL;
+            this->size--;
         }
     }
 }
 
-bool Stack::is_empty() {
-    if (this->size == 0)
+void Stack::print_top() {
+    if (!(this->is_empty()))
+        cout << top->getValue() << endl;
+    else
+        cout << "Stack is empty" << endl;
+}
+
+void Stack::print_all() {
+    Node* curNode = bottom;
+
+    while (curNode) {
+        cout << curNode->getValue() << " ";
+        curNode = curNode->getNext();
+    }
+    cout << endl;
+
+    delete curNode;
+}
+
+int Stack::is_empty() {
+    if (this->size == 0) // 비어있으면 1 반환
         return 1;
     else
         return 0;
 }
 
 int main() {
+    Stack* stack = new Stack;
     char command[6]{};
     int input;
 
     while (strcmp(command, "exit") != 0) {
-        cin >> command >> input;
+        cin >> command;
 
-        if (strcmp(command, "push")) {
+        if (!strcmp(command, "push")) {
+            cin >> input;
+            stack->push(input);
+        }
+        else if (!strcmp(command, "pop")) {
+            stack->pop();
+        }
+        else if (!strcmp(command, "top")) {
+            stack->print_top();
+        }
+        else if (!strcmp(command, "print")) {
+            stack->print_all();
+        }
+        else if (!strcmp(command, "empty")) {
+            cout << stack->is_empty() << endl;
+        }
+        else {
+            cout << "Enter valid command" << endl;
         }
     }
+
+    delete stack;
+
+    return 0;
 }
