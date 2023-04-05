@@ -30,9 +30,13 @@ int main() {
 	memcpy(person1.name, myname, strlen(myname) + 1);
 	person1.age = 46;
 	memcpy(&person1_copy, &person1, sizeof(person1));
-	printf("person1_copy1: %s, %d \n", person1_copy.name, person1_copy.age);
+	printf("person1_copy: %s, %d \n", person1_copy.name, person1_copy.age);
 	// custom method test
 	cout << "Custom" << endl;
+	memcpy(person2.name, myname, strlen(myname) + 1);
+	person2.age = 46;
+	memcpy(&person2_copy, &person2, sizeof(person2));
+	printf("person2_copy: %s, %d \n", person2_copy.name, person2_copy.age);
 
 
 
