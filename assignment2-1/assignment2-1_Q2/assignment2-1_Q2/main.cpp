@@ -2,110 +2,61 @@
 
 using namespace std;
 
-class Node {
-private:
-	int value;
-	Node* next;
-	Node* prev;
-
-public:
-	Node() {
-		this->value = 0;
-		this->next = NULL;
-		this->prev = NULL;
-	}
-	void setValue(int input) { this->value = input; };
-	int getValue() { return this->value; };
-	void setNext(Node* nextNode) { this->next = nextNode; };
-	Node* getNext() { return this->next; };
-	void setPrev(Node* prevNode) { this->prev = prevNode; };
-	Node* getPrev() { return this->prev; };
-};
-
-class Queue {
-private:
-	Node* first;
-	Node* last;
-	int size;
-	
-public:
-	Queue() {
-		this->first = NULL;
-		this->last = NULL;
-		this->size = 0;
-	}
-	void push(int data);
-	void pop();
-	bool isEmpty();
-};
-
-void Queue::push(int data) {
-	Node* newNode = new Node;
-	newNode->setValue(data);
-
-	if (!(isEmpty())) { // 큐가 비어있지 않다면
-		last->setPrev(newNode);
-		newNode->setNext(last);
-		last = newNode;
-		this->size++;
-	}
-	else {
-		first = last = newNode;
-		this->size++;
-	}
-}
-
-void Queue::pop() {
-	if (isEmpty()) {
-		cout << "already empty";
-	}
-	else {
-		if (this->size != 1) { // 큐에 요소가 2개 이상이면
-			Node* delNode = first;
-			first = first->getPrev();
-			delete delNode;
-			first->setNext(NULL);
-			this->size--;
-		}
-		else { // 큐에 요소가 1개면
-			delete first;
-			first = NULL;
-			last = NULL;
-			this->size--;
-		}
-	}
-}
-
-bool Queue::isEmpty() {
-	if (this->size == 0)
-		return 1;
-	else
-		return 0;
-}
+void search(char maze[][30], int curx, int cury, int destx, int desty, int cnt, int col, int row);
 
 
 int main() {
-	int row, col, i, j, x1, x2, y1, y2, cnt=1;
+	int row, col, i, j, x1, x2, y1, y2, cnt = 1;
+	char temp, maze[30][30]{};
 
-	cin >> row >> col;
+	// 미로의 폭과 너비 입력
+	cin >> col >> row;
 
-	char** maze = new char* [row];
-	for (i = 0; i < col; i++)
-		maze[i] = new char[col];
-
-	for (i = 0; i < row; i++) {
-		cin >> maze[i];
+	// 2차원배열에 미로 입력받기
+	for (i = 0; i < col; i++) {
+		for (j = 0; j < row; j++) {
+			cin >> temp;
+			if (temp == '\0')
+				continue;
+			maze[i][j] = temp;
+		}
 	}
 
+	// 시작지점과 도착지점 좌표로 설정
 	cin >> x1 >> y1 >> x2 >> y2;
+	// 이후 입력값 index화하기 위해 1씩 빼주기
+	x1--; y1--; x2--; y2--;
 
 
+	search(maze, x1, y1, x2, y2, cnt, col - 1, row - 1);
 
 
-	for (i = 0; i < col; i++)
-		delete[] maze[i];
-	
-	delete[] maze;
-
+	_CrtDumpMemoryLeaks();
 	return 0;
+}
+
+void search(char maze[][30], int curx, int cury, int destx, int desty, int cnt, int col, int row) {
+	if (curx == destx && cury == desty)
+		cout << cnt;
+
+	// 위로 이동하는 경우
+	if (cury > 0 && maze[cury - 1][curx] != '1') {
+		maze[cury][curx] = '1';
+		search(maze, curx, cury - 1, destx, desty, cnt + 1, col, row);
+	}
+	// 오른쪽으로 이동하는 경우
+	if (curx < row && maze[cury][curx + 1] != '1') {
+		maze[cury][curx] = '1';
+		search(maze, curx + 1, cury, destx, desty, cnt + 1, col, row);
+	}
+	// 아래로 이동하는 경우
+	if (cury < col && maze[cury + 1][curx] != '1') {
+		maze[cury][curx] = '1';
+		search(maze, curx, cury + 1, destx, desty, cnt + 1, col, row);
+	}
+	// 왼쪽으로 이동하는 경우
+	if (curx > 0 && maze[cury][curx - 1] != '1') {
+		maze[cury][curx] = '1';
+		search(maze, curx - 1, cury, destx - 1, desty, cnt + 1, col, row);
+	}
 }
