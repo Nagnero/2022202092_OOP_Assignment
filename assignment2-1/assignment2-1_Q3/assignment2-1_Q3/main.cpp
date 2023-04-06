@@ -13,7 +13,7 @@ struct {
 
 int main() {
 	// memset method test
-	cout << "Origianl" << endl;
+	/*cout << "Origianl" << endl;
 	char str1_memset[] = "almost";
 	memset(str1_memset, '-', 3);
 	puts(str1_memset);
@@ -36,7 +36,7 @@ int main() {
 	memcpy(person2.name, myname, strlen(myname) + 1);
 	person2.age = 46;
 	memcpy(&person2_copy, &person2, sizeof(person2));
-	printf("person2_copy: %s, %d \n", person2_copy.name, person2_copy.age);
+	printf("person2_copy: %s, %d \n", person2_copy.name, person2_copy.age);*/
 
 
 
@@ -132,7 +132,7 @@ int main() {
 	printf("The sentence entered is %u characters long.\n", (unsigned)oopstd::strlen(szInput)); */
 	
 	// atoi method test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	int i_atoi;
 	char buffer_atoi[256];
 	printf("Enter a number: ");
@@ -144,11 +144,11 @@ int main() {
 	printf("Enter a number: ");
 	fgets(buffer_atoi, 256, stdin);
 	i_atoi = oopstd::atoi(buffer_atoi);
-	printf("The value entered is %d. Its double is %d.\n", i_atoi, i_atoi * 2);*/
+	printf("The value entered is %d. Its double is %d.\n", i_atoi, i_atoi * 2);
 
 
 	// atof method test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	double n_atof;
 	char buffer_atof[256];
 	printf("Enter a number: ");
@@ -160,7 +160,7 @@ int main() {
 	printf("Enter a number: ");
 	fgets(buffer_atof, 256, stdin);
 	n_atof = oopstd::atof(buffer_atof);
-	printf("The value entered is %f.\n", n_atof);*/
+	printf("The value entered is %f.\n", n_atof);
 
 	return 0;
  }

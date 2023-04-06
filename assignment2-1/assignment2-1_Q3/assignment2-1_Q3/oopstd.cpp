@@ -102,34 +102,55 @@ namespace oopstd {
 
 	int atoi(const char* str) {
 		int len = 0, result = 0;
+		bool minus = false;
 
 		while (!(str[len] == '\n'))
 			len++;
 
-		for (int i = 0; i < len; i++)
-			result += (str[i] - '0') * pow(10, len - i - 1);
+		for (int i = 0; i < len; i++) {
+			if (i > 0) {
+				result += (str[i] - '0') * pow(10, len - i - 1);
+			}
+			else {
+				if (str[i] == '-')
+					minus = true;
+				else
+					result += (str[i] - '0') * pow(10, len - i - 1);
+			}
+		}
+
+		if (minus)
+			result = -(result);
 
 		return result;
 	}
 
 
 	float atof(const char* str) {
-		int len = 0, result = 0;
+		int len = 1, result = 0;
+		bool minus = false;
+
+		if(str[0] == '-')
+
 
 		while (!(str[len] == '\n'))
 			len++;
 
-		for (int i = 0; i < len; i++)
-			result += (str[i] - '0') * pow(10, len - i - 1);
+		for (int i = 0; i < len; i++) {
+			if (i > 0) {
+				result += (str[i] - '0') * pow(10, len - i - 1);
+			}
+			else {
+				if (str[i] == '-')
+					minus = true;
+				else
+					result += (str[i] - '0') * pow(10, len - i - 1);
+			}
+		}
+
+		if (minus)
+			result = -(result);
 
 		return (float)result;
 	}
 }
-
-/*int len = 0; // 문자열의 길이
-
-
-while ((char *)temp == NULL) {
-	len++;
-	temp = (char*)temp + 1;
-}*/
