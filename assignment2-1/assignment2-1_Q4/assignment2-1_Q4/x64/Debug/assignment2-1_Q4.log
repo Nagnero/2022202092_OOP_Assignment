@@ -1,3 +1,4 @@
 ﻿  main.cpp
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-1\assignment2-1_Q4\assignment2-1_Q4\main.cpp(35,32): warning C4302: '형식 캐스트': 'const char *'에서 'char'(으)로 잘립니다.
+C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-1\assignment2-1_Q4\assignment2-1_Q4\main.cpp(39,32): warning C4302: '형식 캐스트': 'const char *'에서 'char'(으)로 잘립니다.
+  LINK : C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-1\assignment2-1_Q4\x64\Debug\assignment2-1_Q4.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   assignment2-1_Q4.vcxproj -> C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-1\assignment2-1_Q4\x64\Debug\assignment2-1_Q4.exe

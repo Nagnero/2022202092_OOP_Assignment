@@ -19,7 +19,11 @@ int main() {
 	}
 
 	while (fin.get(c)) {
-		if (c == '0') {
+		if (c == '\n') {
+			cnt = 0;
+			continue;
+		}
+		else if (c == '0') {
 			cnt++;
 			if (cnt == 25) {
 				result[index++] = cnt + 'a';
