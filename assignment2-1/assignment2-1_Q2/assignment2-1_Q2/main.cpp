@@ -68,6 +68,6 @@ void search(char** maze, int curx, int cury, int destx, int desty, int cnt, int 
 	// 왼쪽으로 이동하는 경우
 	if (curx > 0 && maze[cury][curx - 1] != '1') {
 		maze[cury][curx] = '1';
-		search(maze, curx - 1, cury, destx - 1, desty, cnt + 1, col, row);
+		search(maze, curx - 1, cury, destx, desty, cnt + 1, col, row);
 	}
 }
