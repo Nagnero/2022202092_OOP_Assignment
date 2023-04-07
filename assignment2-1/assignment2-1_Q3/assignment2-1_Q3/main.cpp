@@ -2,10 +2,12 @@
 #include <iostream>
 #include <string.h>
 #include <cstdlib>
+// oopstd.cpp에 사용자 정의 함수 주석
 #include "oopstd.h"
 
 using namespace std;
 
+// 구조체 선언 후 변수 4개 선언
 struct {
 	char name[40];
 	int age;
@@ -13,7 +15,7 @@ struct {
 
 int main() {
 	// memset method test
-	/*cout << "Origianl" << endl;
+	cout << "Origianl" << endl;
 	char str1_memset[] = "almost";
 	memset(str1_memset, '-', 3);
 	puts(str1_memset);
@@ -36,12 +38,11 @@ int main() {
 	memcpy(person2.name, myname, strlen(myname) + 1);
 	person2.age = 46;
 	memcpy(&person2_copy, &person2, sizeof(person2));
-	printf("person2_copy: %s, %d \n", person2_copy.name, person2_copy.age);*/
+	printf("person2_copy: %s, %d \n", person2_copy.name, person2_copy.age);
 
 
 
 	// strcmp 메서드 test
-	/*
 	cout << endl << "Origianl" << endl;
 	char key[] = "apple";
 	char buffer[80];
@@ -58,11 +59,11 @@ int main() {
 		fflush(stdout);
 		scanf("%79s", buffer);
 	} while (oopstd::strcmp(key, buffer) != 0);
-	puts("Correct anwser!"); */
-
+	puts("Correct anwser!"); 
+	getchar();
 
 	// strncmp 메서드 test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	char str[][5] = {"R2D2", "C3P0", "R2A6"};
 	int n;
 	puts("Looking for R2 astromech droids...");
@@ -76,11 +77,11 @@ int main() {
 	for (n = 0; n < 3; n++) {
 		if (oopstd::strncmp(str[n], "R2xx", 2) == 0)
 			printf("found %s\n", str[n]);
-	} */
+	} 
 
 
 	// strcpy 메서드 test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	char str1[] = "Sample string";
 	char str2[40];
 	char str3[40];
@@ -93,11 +94,11 @@ int main() {
 	char str5[40];
 	oopstd::strcpy(str4, str1);
 	oopstd::strcpy(str5, "copy successful");
-	printf("str1: %s\nstr2: %s\nstr3: %s\n", str1, str2, str3); */
+	printf("str1: %s\nstr2: %s\nstr3: %s\n", str1, str2, str3); 
 
 
 	// strncpy method test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	char str1_stncpy[] = "To be or not to be";
 	char str2_stncpy[40];
 	char str3_stncpy[40];
@@ -116,11 +117,11 @@ int main() {
 	str5_stncpy[5] = '\0';
 	puts(str1_stncpy);
 	puts(str4_stncpy);
-	puts(str5_stncpy); */
+	puts(str5_stncpy); 
 
 
 	// strlen method test
-	/*cout << endl << "Origianl" << endl;
+	cout << endl << "Origianl" << endl;
 	char szInput[256];
 	printf("Enter a sentece: ");
 	gets_s(szInput, sizeof(szInput));
@@ -129,7 +130,8 @@ int main() {
 	cout << "Custom" << endl;
 	printf("Enter a sentece: ");
 	gets_s(szInput, sizeof(szInput));
-	printf("The sentence entered is %u characters long.\n", (unsigned)oopstd::strlen(szInput)); */
+	printf("The sentence entered is %u characters long.\n", (unsigned)oopstd::strlen(szInput)); 
+
 	
 	// atoi method test
 	cout << endl << "Origianl" << endl;
@@ -145,7 +147,7 @@ int main() {
 	fgets(buffer_atoi, 256, stdin);
 	i_atoi = oopstd::atoi(buffer_atoi);
 	printf("The value entered is %d. Its double is %d.\n", i_atoi, i_atoi * 2);
-
+	
 
 	// atof method test
 	cout << endl << "Origianl" << endl;
@@ -161,6 +163,7 @@ int main() {
 	fgets(buffer_atof, 256, stdin);
 	n_atof = oopstd::atof(buffer_atof);
 	printf("The value entered is %f.\n", n_atof);
+
 
 	return 0;
  }
