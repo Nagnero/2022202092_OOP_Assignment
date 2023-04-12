@@ -1,8 +1,4 @@
 ﻿  CSVLoader.cpp
   main.cpp
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\assignment2-2_Q3\main.cpp(10,12): error C2371: 'fin': 재정의. 기본 형식이 다릅니다.
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\assignment2-2_Q3\main.cpp(7,11): message : 'fin' 선언을 참조하십시오.
   코드를 생성하고 있습니다...
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\assignment2-2_Q3\CSVLoader.cpp(23): error C4716: 'CSVLoader::getData': 값을 반환해야 합니다.
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\assignment2-2_Q3\CSVLoader.cpp(27): error C4716: 'CSVLoader::getRows': 값을 반환해야 합니다.
-C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\assignment2-2_Q3\CSVLoader.cpp(31): error C4716: 'CSVLoader::getCols': 값을 반환해야 합니다.
+  assignment2-2_Q3.vcxproj -> C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment2-2\assignment2-2_Q3\x64\Debug\assignment2-2_Q3.exe
