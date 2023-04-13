@@ -47,6 +47,7 @@ public:
     void INSERT(string data);
     void d_INSERT(List* temp_list);
     void Print_all(Node* curNode);
+    void Print(Node* curNode, int index[100], int cnt);
     Node* getHead() { return this->head; }
 };
 
@@ -93,6 +94,31 @@ void List::Print_all(Node* curNode) {
     }
 }
 
+void List::Print(Node* curNode, int index[100], int cnt) {
+    Node* printNode = new Node;
+
+    for (int i = 0; i < cnt; i++) {
+        for (int j = 0; j < index[i]; j++) {
+            curNode = curNode->getNext();
+        }
+
+        printNode = curNode;
+        if (curNode->d_getNext()) {       
+            curNode = curNode->d_getNext();
+        }
+    }
+
+    if (printNode->getInput() == "") {
+        cout << "[";
+        Print_all(printNode->d_getNext());
+        cout << "]" << endl;
+    }
+    else {
+        cout << curNode->getInput() << endl;
+    }
+
+}
+
 
 int parse(List* Linked_list, string input, int i, int level) {
     string temp = "";
@@ -133,13 +159,15 @@ int main() {
 
     parse(Linked_list, input, i, level);
 
-    while (command != "exit") {
+    while (1) {
         cin >> command;
         if (command == "arr") { // 전체 배열 출력
             cout << '[';
             Linked_list->Print_all(Linked_list->getHead());
             cout << ']' << endl;
         }
+        else if (command == "exit")
+            break;
         else { // 배열 지정해서 출력 할 시
             int cnt = 0, index[100] {}; // 100차원 배열까지 출력 가능
             for (int i = 3; i < command.length(); i++) 
@@ -153,10 +181,7 @@ int main() {
                     index[cnt++] = stoi(temp);
                 }
 
-
+            Linked_list->Print(Linked_list->getHead(), index, cnt);
         }
     }
-
-
-
 }
