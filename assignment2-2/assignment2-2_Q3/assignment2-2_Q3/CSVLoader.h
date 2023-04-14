@@ -10,11 +10,11 @@ public:
 	~CSVLoader();
 
 	float** getData() const; // 값이 저장된 2중 포인터 반환
-	int getRows() const;
-	int getCols() const;
+	int getRows() const; // row 반환
+	int getCols() const; // col 반환
 
-	void parse(const char* path);
-	void print(void);
+	void parse(const char* path); // 파싱 멤버함수 선언
+	void print(void); // 출력 멤버함수선언
 
 private:
 	float** data;
