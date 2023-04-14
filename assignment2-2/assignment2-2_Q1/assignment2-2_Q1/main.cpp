@@ -146,11 +146,11 @@ int parse(List* Linked_list, string input, int i, int level) {
         else if (input[i] == ']') { // 배열 탈출을 만나면
             Linked_list->Insert(temp); // temp에 저장된 값을 삽입
             temp = "";
-            i = i + 3;
+            i = i + 2;
             return i; // i 반환
         }
         else if (input[i] == ',') {
-            i = i + 2; // 콤마와 공백은 세트이므로
+            i++;
             Linked_list->Insert(temp);
             temp = "";
 
@@ -169,6 +169,8 @@ int main() {
     int begin = 1, end = 0, level = 1, i = 1;
 
     getline(cin, input); // 입력값 input에 저장
+
+    input.erase(remove(input.begin(), input.end(), ' '), input.end());
 
     parse(Linked_list, input, i, level);
 
