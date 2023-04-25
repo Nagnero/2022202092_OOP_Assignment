@@ -1,0 +1,8 @@
+insert John 23 USA designer
+insert James 28 Korea developer
+insert Jessica 27 Japan manager
+print
+find James
+change James Jason 22 China writer
+print
+exit
