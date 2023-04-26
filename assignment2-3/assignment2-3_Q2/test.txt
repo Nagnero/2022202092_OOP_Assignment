@@ -1,0 +1,4 @@
+new_student Jim 8 Hope
+new_student Alice 9 Love
+new_student Claude 8 Hope
+new_student Megan 11 Wish
