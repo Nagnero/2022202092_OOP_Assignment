@@ -1,20 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
-
-#include <Windows.h>
-
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
-
-#ifdef _DEBUG
-#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#endif
+#include <cmath>
 
 using namespace std;
 
-
-// string.cpp 시작부
 namespace oopstd {
 
 	class string {
@@ -257,7 +247,7 @@ namespace oopstd {
 
 		for (; i < str.getlen(); i++) {
 			// 소수점을 만나면 탈출
-			if (isdigit(str.c_str()[i]) == '.') {
+			if (str.c_str()[i] == '.') {
 				i++;
 				break;
 			}
@@ -272,11 +262,14 @@ namespace oopstd {
 		}
 
 		float temp_num = 0; // 소수점 아래 수 임시 저장 변수
-		for (; i < str.getlen(); i++) {			
+		int temp_pow = 1;
+		for (; i < str.getlen(); i++) {	
 			if (isdigit(str.c_str()[i])) { // 숫자가 맞으면
 				int digit = str.c_str()[i] - '0';
-				temp_num = temp_num * 0.1 + digit; // 0.1을 곱해서 더하기
+				temp_num = temp_num + digit * pow(0.1, temp_pow++); // 0.1의 제곱을 곱해서 더하기
 			}
+			else
+				break;
 		}
 
 		*idx = i; // 문자열이 시작되는 위치 저장
@@ -284,12 +277,28 @@ namespace oopstd {
 		return num + temp_num;
 	}
 
-	string to_string(int val);
-	string to_string(float val);
+	// int형 변수를 문자열로 변환
+	string to_string(int val) {
+		char* new_char = new char[12]; // 정수형의 최대 자릿수보다 조금 크게 문자열 동적할당
+		sprintf(new_char, "%d", val); // 값을 문자열로 변환하여 문자열에 저장
 
+		string temp_str; // 임시로 string객체를 생성하여
+		temp_str.assign(new_char); // 앞선 문자열을 저장 후 
+
+		return temp_str; // 반환
+	}
+	// float형 변수를 문자열로 변환
+	string to_string(float val) {
+		char* new_char = new char[50]; // 실수형의 최대 자릿수보다 조금 크게 임의로 문자열 동적할당
+		sprintf(new_char, "%f", val); // 값을 문자열로 변환하여 문자열에 저장
+
+		string temp_str; // 임시로 string객체를 생성하여
+		temp_str.assign(new_char); // 앞선 문자열을 저장 후 
+
+		return temp_str; // 반환
+	}
 }
 
-// string.cpp 종결부
 
 int main() {
 	
@@ -374,11 +383,18 @@ int main() {
 	// custom method test
 	oopstd::string float_number2 = "1.5abc";
 	float float_num2 = stof(float_number2, &sz2);
-	cout << float_num2 << "  " << sz2 << endl;
+	cout << float_num2 << "  " << sz2 << endl << endl;
 
-	getchar();
-	getchar();
+	// to_string method test
+	int test1 = 42;
+	float test2 = 23.56;
+	string str1 = to_string(test1);
+	string str2 = to_string(test2);
+	cout << str1 << "  " << str2 << endl;
+	// custom method test
+	oopstd::string str3 = oopstd::to_string(test1);
+	oopstd::string str4 = oopstd::to_string(test2);
+	cout << str3.c_str() << "  " << str4.c_str() << endl << endl;
 	
 	return 0;
-	_CrtDumpMemoryLeaks();
 }
