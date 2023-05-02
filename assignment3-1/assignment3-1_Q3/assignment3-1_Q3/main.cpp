@@ -24,6 +24,7 @@ public:
 		this->m_pNext = NULL;
 		this->m_Data = 0;
 	}
+	~Node() {}
 
 	void SetData(int n) { this->m_Data = n; }
 	void SetNext(Node* pNext) { this->m_pNext = pNext; }
@@ -49,15 +50,16 @@ public:
 	~Queue() {
 		Node* curNode = m_pHead;
 		Node* delNode = NULL;
-		
+
 		while (curNode) {
 			delNode = curNode;
 			curNode = curNode->GetNext();
+			if (delNode == m_pTail) {
+				this->m_pHead = NULL;
+				this->m_pTail = NULL;
+			}
 			delete delNode;
 		}
-
-		this->m_pHead = NULL;
-		this->m_pTail = NULL;
 	}
 
 	void SetSize(int n) { this->m_Size = n; }
@@ -92,7 +94,7 @@ Node* Queue::Pop() {
 		Node* tempNode = m_pHead; // 반환할 노드 주소 저장
 		m_pHead = m_pHead->GetNext(); // head노드 다음으로 이동
 		m_NumElemnet--;
-		
+
 		return tempNode;
 	}
 	else { // 저장된 노드가 1개인 경우
@@ -105,9 +107,18 @@ Node* Queue::Pop() {
 	}
 }
 
+void Queue::PrintQueue() {
+	Node* curNode = m_pHead;
+
+	while (curNode) {
+		cout << curNode->GetData() << " ";
+		curNode = curNode->GetNext();
+	}
+}
+
 int main() {
 	Queue* queue = new Queue;
-	string command;
+	char command[20]{};
 	int input = 0, size;
 
 	cin >> size;
@@ -116,7 +127,7 @@ int main() {
 	while (1) {
 		cin >> command;
 
-		if (command == "push") {
+		if (strcmp(command, "push") == 0) {
 			cin >> input;
 
 			if (!queue->IsFull()) { // 꽉 차 있지 않으면
@@ -130,7 +141,7 @@ int main() {
 				cout << "Already full" << endl;
 			}
 		}
-		else if (command == "pop") {
+		else if (strcmp(command, "pop") == 0) {
 
 			if (!queue->IsEmpty()) { // 비어있지 않으면
 				Node* delNode = queue->Pop();
@@ -142,10 +153,11 @@ int main() {
 				cout << "Already Empty" << endl;
 			}
 		}
-		else if (command == "print") {
-
+		else if (strcmp(command, "print") == 0) {
+			queue->PrintQueue();
+			cout << endl;
 		}
-		else if (command == "exit")
+		else if (strcmp(command, "exit") == 0)
 			break;
 		else
 			cout << "Enter valid command" << endl;
