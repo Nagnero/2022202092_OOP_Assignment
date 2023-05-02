@@ -1,5 +1,17 @@
 #include <iostream>
 
+
+#include <Windows.h>
+
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#endif
+
+
 using namespace std;
 
 class Node {
@@ -12,7 +24,6 @@ public:
 		this->m_pNext = NULL;
 		this->m_Data = 0;
 	}
-	~Node() {}
 
 	void SetData(int n) { this->m_Data = n; }
 	void SetNext(Node* pNext) { this->m_pNext = pNext; }
@@ -34,9 +45,19 @@ public:
 		this->m_Size = 0;
 		this->m_NumElemnet = 0;
 	}
+
 	~Queue() {
-		delete m_pHead;
-		delete m_pTail;
+		Node* curNode = m_pHead;
+		Node* delNode = NULL;
+		
+		while (curNode) {
+			delNode = curNode;
+			curNode = curNode->GetNext();
+			delete delNode;
+		}
+
+		this->m_pHead = NULL;
+		this->m_pTail = NULL;
 	}
 
 	void SetSize(int n) { this->m_Size = n; }
@@ -107,10 +128,10 @@ int main() {
 			}
 			else { // 꽉 차있으면
 				cout << "Already full" << endl;
-			}			
+			}
 		}
 		else if (command == "pop") {
-			
+
 			if (!queue->IsEmpty()) { // 비어있지 않으면
 				Node* delNode = queue->Pop();
 				cout << "pop " << delNode->GetData() << endl; // 출력
@@ -124,7 +145,13 @@ int main() {
 		else if (command == "print") {
 
 		}
+		else if (command == "exit")
+			break;
+		else
+			cout << "Enter valid command" << endl;
 	}
 
+	delete queue;
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
