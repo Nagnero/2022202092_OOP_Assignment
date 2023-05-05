@@ -132,6 +132,10 @@ int main() {
 				cout << "Already Empty" << endl;
 			}
 		}
+        else if (strcmp(command, "print") == 0) { // print 명령어 처리
+            stack->PrintStack(); // 큐에 저장된 모든 데이터를 출력
+            cout << endl; // 개행 문자 출력
+        }
         else if (strcmp(command, "exit") == 0) { // exit 명령을 입력한 경우
             break; // 반복문 탈출
         }
