@@ -93,6 +93,7 @@ public:
 
     void setHead(ArtistNode* head) { this->head = head; }
     void loadFile(const char* filename);
+    ArtistNode* getHead() { return this->head; }
 };
 
 void MyMusicManagementList::loadFile(const char* filename) {
@@ -190,12 +191,28 @@ void MyMusicManagementList::loadFile(const char* filename) {
             lastNode->setNext(newArtist);
         }
     }
+
+    cout << "Music info loaded" << endl;
 }
 
 int main() {
     MyMusicManagementList List;
+    string command;
 
     List.loadFile("Music_info.txt");
+
+    // 파일에서 읽어온 데이터 출력
+    ArtistNode* curArtistNode = List.getHead();
+    do {
+        cout << "Artist: " << curArtistNode->getName() << endl;
+        SongNode* curSongNode = curArtistNode->getFirst();
+        while (curSongNode) {
+            cout << "\t - Song: " << curSongNode->getTitle() << endl;
+            curSongNode = curSongNode->getNext();
+        }
+        curArtistNode = curArtistNode->getNext();
+    } while (curArtistNode != List.getHead());
+
 
     return 0;
 }
