@@ -2,6 +2,9 @@
 
 using namespace std;
 
+// 변수 판단
+char variable = 'x';
+
 class Term {
 private:
     int m_Coefficient;
@@ -41,6 +44,144 @@ public:
     void Sub(Polynomial& poly);
 };
 
+// print 멤버함수
+void Polynomial::PrintList() {
+    Term* curNode = this->m_pHead;
+
+    while (curNode) {
+        int print_coeff = curNode->getCoeff();
+        // 양수인 경우 + 붙여서 출력
+        if (print_coeff > 0)
+            cout << '+';
+        // 지수가 0이 아닌 경우
+        if (curNode->getExponent() != 0) {
+            cout << print_coeff;
+            cout << variable << "^";
+            cout << curNode->getExponent();
+            curNode = curNode->getNext();
+        }
+        // 지수가 0인 경우
+        else {
+            cout << print_coeff;
+            curNode = curNode->getNext();
+        }
+        cout << " ";
+    }
+    cout << endl;
+}
+
+// 합 멤버함수
+void Polynomial::Add(Polynomial& poly) {
+    // 출력할 임시 객체 선언
+    Polynomial* tempPoly = new Polynomial;
+    // 탐색 노드 각각 선언
+    Term* cur1 = this->m_pHead;
+    Term* cur2 = poly.m_pHead;
+
+    while (cur1 && cur2) {
+        // 지수가 같은 값에 대해
+        if (cur1->getExponent() == cur2->getExponent()) {
+            // 계수 임시 저장 변수
+            int sum = cur1->getCoeff() + cur2->getCoeff();
+            
+            // 계수가 0이 아니면 저장
+            if (sum != 0) {
+                Term* newTerm = new Term(sum, cur1->getExponent());
+                tempPoly->Insert(newTerm);
+            }            
+            cur1 = cur1->getNext();
+            cur2 = cur2->getNext();
+        }
+        // 첫번째 다항식의 지수가 더 작은 경우
+        else if (cur1->getExponent() < cur2->getExponent()) {
+            Term* newTerm = new Term(cur2->getCoeff(), cur2->getExponent());
+            tempPoly->Insert(newTerm);
+            cur2 = cur2->getNext();
+        }
+        // 두번째 다항식의 지수가 더 작은 경우
+        else {
+            Term* newTerm = new Term(cur1->getCoeff(), cur1->getExponent());
+            tempPoly->Insert(newTerm);
+            cur1 = cur1->getNext();
+        }
+    }
+    // 첫번째 다항식을 모두 처리한 경우
+    if (!cur1) {
+        while (cur2) {
+            Term* newTerm = new Term(cur2->getCoeff(), cur2->getExponent());
+            tempPoly->Insert(newTerm);
+            cur2 = cur2->getNext();
+        }
+    }
+    else if (!cur2) {
+        while (cur1) {
+            Term* newTerm = new Term(cur1->getCoeff(), cur1->getExponent());
+            tempPoly->Insert(newTerm);
+            cur1 = cur1->getNext();
+        }
+    }
+
+    tempPoly->PrintList();
+
+    delete tempPoly;
+}
+
+// 차 멤버함수
+void Polynomial::Sub(Polynomial& poly) {
+    // 출력할 임시 객체 선언
+    Polynomial* tempPoly = new Polynomial;
+    // 탐색 노드 각각 선언
+    Term* cur1 = this->m_pHead;
+    Term* cur2 = poly.m_pHead;
+
+    while (cur1 && cur2) {
+        // 지수가 같은 값에 대해
+        if (cur1->getExponent() == cur2->getExponent()) {
+            // 계수 임시 저장 변수
+            int sub = cur1->getCoeff() - cur2->getCoeff();
+
+            // 계수가 0이 아니면 저장
+            if (sub != 0) {
+                Term* newTerm = new Term(sub, cur1->getExponent());
+                tempPoly->Insert(newTerm);
+            }
+            cur1 = cur1->getNext();
+            cur2 = cur2->getNext();
+        }
+        // 첫번째 다항식의 지수가 더 작은 경우
+        else if (cur1->getExponent() < cur2->getExponent()) {
+            Term* newTerm = new Term(-cur2->getCoeff(), cur2->getExponent());
+            tempPoly->Insert(newTerm);
+            cur2 = cur2->getNext();
+        }
+        // 두번째 다항식의 지수가 더 작은 경우
+        else {
+            Term* newTerm = new Term(cur1->getCoeff(), cur1->getExponent());
+            tempPoly->Insert(newTerm);
+            cur1 = cur1->getNext();
+        }
+    }
+    // 첫번째 다항식을 모두 처리한 경우
+    if (!cur1) {
+        while (cur2) {
+            Term* newTerm = new Term(cur2->getCoeff(), cur2->getExponent());
+            tempPoly->Insert(newTerm);
+            cur2 = cur2->getNext();
+        }
+    }
+    else if (!cur2) {
+        while (cur1) {
+            Term* newTerm = new Term(cur1->getCoeff(), cur1->getExponent());
+            tempPoly->Insert(newTerm);
+            cur1 = cur1->getNext();
+        }
+    }
+
+    tempPoly->PrintList();
+
+    delete tempPoly;
+}
+
 // 삽입 멤버함수 정의
 void Polynomial::Insert(Term* pTerm) {
     // 첫번째 노드가 아닌 경우
@@ -57,6 +198,7 @@ void Polynomial::Insert(Term* pTerm) {
     }
 }
 
+// 객체에 다항식 저장 함수
 void createPolynomial(char temp[], Polynomial* Poly) {
 
     char input[256]{};
@@ -83,13 +225,13 @@ void createPolynomial(char temp[], Polynomial* Poly) {
             continue;
         }
 
-        int coeff = 0, exponent = 0, sign = 1;
+        int coeff = 0, exponent = 0, sign_coeff = 1, sign_expo = 1;
         // coeffi의 부호 확인
         if (input[index] == '-') {
-            sign = -1;
+            sign_coeff = -1;
             index++;
         }
-        else {
+        else if (input[index] == '+') {
             index++;
         }
 
@@ -113,6 +255,12 @@ void createPolynomial(char temp[], Polynomial* Poly) {
             if (input[index] == '^')
                 index++;
 
+            // 지수의 부호 판단
+            if (input[index] == '-') {
+                sign_expo = -1;
+                index++;
+            }      
+
             // 이후 Exponent 판단
             while (input[index] >= '0' && input[index] <= '9') {
                 exponent *= 10;
@@ -120,15 +268,13 @@ void createPolynomial(char temp[], Polynomial* Poly) {
                 index++;
             }
 
+            // 지수가 0이면 1로 증가
             if (!exponent)
                 exponent++;
-        }
+        }        
         
-
-        
-
         // 첫번째 다항식 저장
-        Term* newTerm = new Term(coeff, exponent);
+        Term* newTerm = new Term(coeff * sign_coeff, exponent * sign_expo);
         Poly->Insert(newTerm);
     }
 }
@@ -138,6 +284,7 @@ int main() {
     Polynomial* polynomial1 = new Polynomial;
     Polynomial* polynomial2 = new Polynomial;
     char temp[256]{};
+    int command = 0;
 
     // 첫번째 다항식 입력
     cout << "Enter first polynomial" << endl;
@@ -151,6 +298,26 @@ int main() {
     cin.getline(temp, 256);
     // 두번째 다항식 저장
     createPolynomial(temp, polynomial2);
+
+    // 어떤 변수인지 판단하고 저장 , 기본은 x
+    for (int i = 0; i < 256; i++)
+        if (temp[i] >= 'A' && temp[i] <= 'z') {
+            variable = temp[i];
+            break;
+        }
+
+
+    while (1) {
+        cout << "Enter command (1.Add, 2.Subtract, else.exit): ";
+        cin >> command;
+
+        if (command == 1)
+            polynomial1->Add(*polynomial2);
+        else if (command == 2)
+            polynomial1->Sub(*polynomial2);
+        else
+            break;
+    }
 
     delete polynomial1;
     delete polynomial2;
