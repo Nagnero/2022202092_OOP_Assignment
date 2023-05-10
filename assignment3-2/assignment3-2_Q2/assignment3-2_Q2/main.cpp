@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <string.h>
+#include <string>
 
 using namespace std;
 
@@ -60,32 +60,34 @@ void myMusic::setAlbum(char* album) {
     this->m_album[len] = '\0';
 }
 
+char* checkSpace(char* input);
+int change_to_int(char* input);
+
 int main() {
     myMusic music;
 
-    char title[32], singer[32], album[32];
-    int track_no, year;
+    char input[128], track_no[10], year[10];
+    char* token;
 
-    cout << "Enter music title: ";
-    cin.getline(title, 32); // 문자열 입력 받기 (공백 포함)
-    music.setTitle(title); // 곡 제목 설정
 
-    // 이하 동일
-    cout << "Enter singer name: ";
-    cin.getline(singer, 32);
-    music.setSinger(singer);
+    cin.getline(input, 128);
+    
+    token = strtok(input, ",");
+    music.setTitle(checkSpace(token));
 
-    cout << "Enter album title: ";
-    cin.getline(album, 32);
-    music.setAlbum(album);
+    token = strtok(NULL, ",");
+    music.setSinger(checkSpace(token));
 
-    cout << "Enter track number: ";
-    cin >> track_no;
-    music.setTrackNo(track_no);
+    token = strtok(NULL, ",");
+    music.setAlbum(checkSpace(token));
 
-    cout << "Enter published year: ";
-    cin >> year;
-    music.setYear(year);
+    token = strtok(NULL, ",");
+    strcpy(track_no, checkSpace(token));
+    music.setTrackNo(change_to_int(track_no));
+
+    token = strtok(NULL, ",");
+    strcpy(year, checkSpace(token));
+    music.setYear(change_to_int(year));
 
     cout << endl << "Title: " << music.getTitle() << endl; // 곡 제목 출력
     cout << "Singer: " << music.getSinger() << endl; // 가수 이름 출력
@@ -94,4 +96,30 @@ int main() {
     cout << "Year: " << music.getYear() << endl; // 발매 연도 출력
 
     return 0;
+}
+
+char* checkSpace(char* input) {
+    int j = 0, i = 0;
+    char temp[32]{};
+
+    // 콤마 뒤에 공백삭제
+    for (; input[i] == ' '; i++);
+
+    while (input[i]) {
+        temp[j++] = input[i++];
+    }
+
+
+    return temp;
+}
+
+int change_to_int(char* input) {
+    int temp = 0;
+
+    for (int i = 0; input[i]; i++) {
+        temp *= 10;
+        temp += input[i] - '0';
+    }
+
+    return temp;
 }
