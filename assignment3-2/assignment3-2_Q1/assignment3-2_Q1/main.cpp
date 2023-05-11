@@ -62,6 +62,8 @@ public:
 
 	void setHead(Node* head) { this->head = head; }
 	Node* getHead() { return this->head; }
+	void setTail(Node* tail) { this->tail = tail; }
+	Node* getTail() { return this->tail; }
 
 	void Insert(Node* nextNode);
 	bool checkDup(int data);
@@ -130,12 +132,47 @@ int main() {
 		}		
 	}
 
-	cout << "Enter search value: ";
-	cin >> n;
+	// 랜덤 생성한 수열 출력
+	cout << "--- Random creation ---" << endl;
 	list->printAll();
+	cout << endl << "Enter search value: ";
+	cin >> n;
 
 	Node* printNode = Binary_Search(list->getHead(), n);
-	list->printAll();
+
+	cout << endl;
+	if (printNode->getData() == n) {
+		cout << "Target found" << endl;
+		cout << "Result: " << n;
+	}
+	else {
+		cout << "Target not found" << endl;
+		cout << "Nearest: ";
+		// 가장 가까운 값이 head나 tail 노드면
+		if (printNode == list->getHead() || printNode == list->getTail())
+			cout << printNode->getData();
+		else {
+			int left, right;
+			// 반환받은 노드가 찾는 값보다 클 경우
+			if (printNode->getData() > n) {
+				left = printNode->getData();
+				right = printNode->getNext()->getData();
+			}
+			// 반환받은 노드가 찾는 값보다 작은 경우
+			else {
+				left = printNode->getPrev()->getData();
+				right = printNode->getData();
+			}
+			
+			// 큰 값이 더 가까울 경우
+			if (n - left > right - n)
+				cout << right;
+			else
+				cout << left;
+		}
+	}
+	cout << endl;
+
 
 	delete list;
 
@@ -143,10 +180,64 @@ int main() {
 }
 
 Node* Binary_Search(Node* p, int n) {
-	
-	list->setHead(Insertion_Sort(p));
 
-	return p;
+	cout << endl << "Insertion sort process" << endl;
+	// 정렬 후 list의 head 변경
+	list->setHead(Insertion_Sort(p));
+	while (p) {
+		list->setTail(p);
+		p = p->getNext();
+	}
+
+	// 이진 탐색 시작
+	cout << endl <<  "Binary Search: ";
+	Node* left = list->getHead();
+	Node* right = list->getTail();
+	Node* mid = NULL;
+	int low = 0, middle = 0, high = 0;
+	bool first = true;
+	// 길이 카운트
+	Node* tempNode = left;
+	while (tempNode != right) {
+		tempNode = tempNode->getNext();
+		high++;
+	}
+
+
+	while (high > low) {
+		middle = (high + low) / 2;
+		if (!first)
+			cout << " -> ";
+		else
+			first = false;
+		// 가운데 노드 저장
+		tempNode = left;
+		for (int i = low; i < middle; i++)
+			tempNode = tempNode->getNext();
+		mid = tempNode;
+		cout << mid->getData();
+
+		// 서치 성공
+		if (mid->getData() == n) {
+			return mid;
+		}
+		// 중간 노드값이 찾는 값보다 클 경우
+		else if (mid->getData() > n && mid != list->getTail()) {
+			low = middle + 1;
+			left = mid->getNext();
+		}
+		// 중간 노드값이 찾는 값보다 작을 경우
+		else if (mid->getData() < n && mid != list->getHead()) {
+			high = middle - 1;
+			right = mid->getPrev();
+		}
+	}
+
+	if (high == low) {
+		return left;
+	}
+
+	return mid;
 }
 
 Node* Insertion_Sort(Node* p) {
