@@ -36,7 +36,16 @@ public:
     Polynomial() {
         this->m_pHead = NULL;
     }
-    ~Polynomial() {}
+    ~Polynomial() {
+        Term* curNode = m_pHead;
+        Term* delNode = nullptr;
+
+        while (curNode) {
+            delNode = curNode;
+            curNode = curNode->getNext();
+            delete delNode;
+        }
+    }
 
     void Insert(Term* pTerm);
     void PrintList();
@@ -164,7 +173,7 @@ void Polynomial::Sub(Polynomial& poly) {
     // 첫번째 다항식을 모두 처리한 경우
     if (!cur1) {
         while (cur2) {
-            Term* newTerm = new Term(cur2->getCoeff(), cur2->getExponent());
+            Term* newTerm = new Term(-cur2->getCoeff(), cur2->getExponent());
             tempPoly->Insert(newTerm);
             cur2 = cur2->getNext();
         }
