@@ -33,7 +33,16 @@ public:
         this->first = first;
         this->name = name;
     }
-    ~ArtistNode() {}
+    ~ArtistNode() {
+        SongNode* curNode = first;
+        SongNode* delNode = nullptr;
+
+        while (curNode) {
+            delNode = curNode;
+            curNode = curNode->getNext();
+            delete delNode;
+        }
+    }
 
     void setNext(ArtistNode* nextNode) { this->nextNode = nextNode; }
     void setFirst(SongNode* newNode) { this->first = newNode; }
