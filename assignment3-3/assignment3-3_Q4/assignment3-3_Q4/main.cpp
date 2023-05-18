@@ -59,7 +59,7 @@ public:
     void PrintList(bool isAscending);
 };
 
-// Insert 멤버함수 구현
+// Insert 멤버함수 정의
 void StudentScoreList::Insert(Score* pScore) {
     // 추가된 요소가 이미 있는 경우
     if (this->m_pHead) {
@@ -104,13 +104,38 @@ void StudentScoreList::Insert(Score* pScore) {
     }
 }
 
+// PrintList 멤버함수 정의
+void StudentScoreList::PrintList(bool isAscending) {
+    Score* curScore = NULL;
+    // 오름차순 출력
+    if (isAscending) {
+        curScore = m_pHead;
+        
+        while (curScore) {
+            cout << curScore->getAvr() << " ";
+            curScore = curScore->GetNext();
+        }
+        cout << endl;
+    }
+    // 내림차순 출력
+    else {
+        curScore = m_pTail;
+
+        while (curScore) {
+            cout << curScore->getAvr() << " ";
+            curScore = curScore->GetPrev();
+        }
+        cout << endl;
+    }
+}
+
 int main() {
     StudentScoreList* list = new StudentScoreList;
     double Math, Eng, Sci, average;
     int command;
 
     while (1) {
-        cout << "Enter command (1.Insert 2.Print_ascending 3. Print_descending): ";
+        cout << "Enter command (1.Insert 2.Print_ascending 3. Print_descending else.exit): ";
         cin >> command;
 
         if (command == 1) {
@@ -121,6 +146,16 @@ int main() {
             Score* newScore = new Score(average);
             list->Insert(newScore);
         }
+        else if (command == 2) { 
+            list->PrintList(true);
+        }
+        else if (command == 3) {
+            list->PrintList(false);
+        }
+        else {
+            break;
+        }
     }
-
+    delete list;
+    return 0;
 }
