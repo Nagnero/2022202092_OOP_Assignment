@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment3-3\assignment3-3_Q3\assignment3-3_Q3\main.cpp(80): warning C4172: 지역 변수 또는 임시: tempmat의 주소를 반환하고 있습니다.
+  assignment3-3_Q3.vcxproj -> C:\Users\david\OneDrive\바탕 화면\code\2022202092_OOP_Assignment\assignment3-3\assignment3-3_Q3\x64\Debug\assignment3-3_Q3.exe
