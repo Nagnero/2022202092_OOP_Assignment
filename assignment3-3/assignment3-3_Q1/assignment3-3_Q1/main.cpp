@@ -76,18 +76,27 @@ int main() {
     string input;
     cin >> input;
     percent = convertToNumber(input);
-    cout << endl << "---------------------------------------" << endl;
+    cout << "---------------------------------------" << endl;
 
-    DiscountSale* discount = new DiscountSale(item1, percent);
+    DiscountSale* discount1 = new DiscountSale(item1, percent);
+    DiscountSale* discount2 = new DiscountSale(item2, percent);
 
-    cout << "Item1 price: $" << sale1->GetPrice() << endl;
-    cout << "Item2 price: $" << sale2->GetPrice() << endl;
-    cout << "Item1 bill after discount: $" << discount->Bill() << endl;
-    cout << "Item1 savings compared to Item2: $" << discount->Savings(*sale2) << endl;
+    cout << "Result:" << endl;
+    // Item1의 가격의 할인 가격이 더 싼 경우
+    if (discount1->Bill() < discount2->Bill()) {
+        cout << "Discount price of item1 is chaeper." << endl;
+        cout << "Saving discount price is $" << discount2->Bill()-discount1->Bill() << endl;
+
+    }
+    else {
+        cout << "Discount price of item2 is chaeper." << endl;
+        cout << "Saving discount price is $" << discount1->Bill()- discount2->Bill()  << endl;
+    }
 
     delete sale1;
     delete sale2;
-    delete discount;
+    delete discount1;
+    delete discount2;
 
     return 0;
 }

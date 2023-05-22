@@ -81,6 +81,8 @@ void Student::Say() {
 		break;
 	}
 	cout << "I'm majoring in " << this->getmajor() << "." << endl;
+	cout << "My student ID is " << this->getStudentNum() << "." << endl;
+
 }
 
 class Professor : public Person {
